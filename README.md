@@ -25,7 +25,8 @@ How to use this project:
 - Eclipse [Can be downloaded from www.eclipse.org]
 - MongoDB [Can be downloaded from www.mongodb.com]
 
-Steps:
+Usage steps
+
 1. Download and install Java, eclipse and Mongodb.
 
 2. Start the mongoDb server (mongod.exe) by getting into the installation location [....MongoDB\Server\3.2\bin].
