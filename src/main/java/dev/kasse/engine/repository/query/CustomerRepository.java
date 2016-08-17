@@ -1,0 +1,27 @@
+package dev.kasse.engine.repository.query;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import dev.kasse.engine.entities.Customer;
+import dev.kasse.engine.repository.query.custom.CustomerRepositoryCustom;
+
+/**
+ * 
+ * @author Deivarayan Azhagappan
+ *
+ */
+public interface CustomerRepository extends MongoRepository<Customer, String>,
+    CustomerRepositoryCustom {
+
+  public List<Customer> findAll();
+
+  public List<Customer> findByFirstName(String firstName);
+
+  public List<Customer> findByLastName(String firstName);
+
+  public List<Customer> findByTelephoneNumber(String telephoneNumber);
+
+  public List<Customer> findByStreet(String street);
+}
