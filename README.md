@@ -35,4 +35,4 @@ Note: By default mongodb server runs on port 27017 and it is configured in the m
 
 Contributions are most welcome :)
 
-[Kasse engine]: img/KasseEngine.png
+[Kasse-engine]: img/KasseEngine.png
