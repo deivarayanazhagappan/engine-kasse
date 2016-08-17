@@ -29,6 +29,7 @@ Steps:
 1. Download and install Java, eclipse and Mongodb.
 
 2. Start the mongoDb server (mongod.exe) by getting into the installation location [....MongoDB\Server\3.2\bin].
+
 Note: By default mongodb server runs on port 27017 and it is configured in the mongo-repository-context.xml in the project.
 
 3. Clone the project.
