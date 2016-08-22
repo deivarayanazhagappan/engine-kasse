@@ -17,6 +17,8 @@ public interface CustomerRepository extends MongoRepository<Customer, String>,
 
   public List<Customer> findAll();
 
+  public Customer findById(String id);
+
   public List<Customer> findByFirstName(String firstName);
 
   public List<Customer> findByLastName(String firstName);
@@ -24,4 +26,6 @@ public interface CustomerRepository extends MongoRepository<Customer, String>,
   public List<Customer> findByTelephoneNumber(String telephoneNumber);
 
   public List<Customer> findByStreet(String street);
+
+  public List<Customer> findByZipcode(String zipcode);
 }

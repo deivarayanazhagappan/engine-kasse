@@ -1,5 +1,6 @@
 package dev.kasse.engine.repository.query.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
   @Override
   public List<Customer> containsFirstName(String firstName) {
+    if(firstName== null) {
+      return new ArrayList<Customer>();  
+    }
+    
     Query query = new Query();
     query.addCriteria(Criteria.where("firstName").regex(firstName, "i"));
     return mongoTemplate.find(query, Customer.class);
@@ -24,6 +29,11 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
   @Override
   public List<Customer> containsLastName(String lastName) {
+ 
+    if(lastName== null) {
+      return new ArrayList<Customer>();  
+    }
+ 
     Query query = new Query();
     query.addCriteria(Criteria.where("lastName").regex(lastName, "i"));
     return mongoTemplate.find(query, Customer.class);
@@ -31,6 +41,11 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
   @Override
   public List<Customer> containsTelephoneNumber(String telephoneNumber) {
+
+    if(telephoneNumber == null) {
+      return new ArrayList<Customer>();  
+    }
+    
     Query query = new Query();
     query.addCriteria(Criteria.where("telephoneNumber").regex(telephoneNumber,
         "i"));
@@ -39,8 +54,25 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom {
 
   @Override
   public List<Customer> containsStreet(String street) {
+
+    if(street == null) {
+      return new ArrayList<Customer>();  
+    }
+    
     Query query = new Query();
     query.addCriteria(Criteria.where("street").regex(street, "i"));
+    return mongoTemplate.find(query, Customer.class);
+  }
+
+  @Override
+  public List<Customer> containsZipcode(String zipcode) {
+
+    if(zipcode == null) {
+      return new ArrayList<Customer>();  
+    }
+    
+    Query query = new Query();
+    query.addCriteria(Criteria.where("zipcode").regex(zipcode, "i"));
     return mongoTemplate.find(query, Customer.class);
   }
 }

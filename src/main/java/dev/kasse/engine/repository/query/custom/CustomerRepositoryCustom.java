@@ -19,4 +19,6 @@ public interface CustomerRepositoryCustom {
   public List<Customer> containsTelephoneNumber(String telephoneNumber);
 
   public List<Customer> containsStreet(String street);
+
+  public List<Customer> containsZipcode(String zipcode);
 }

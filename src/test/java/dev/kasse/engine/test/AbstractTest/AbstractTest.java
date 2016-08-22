@@ -92,7 +92,17 @@ public abstract class AbstractTest {
   protected Customer createCustomer(String firstName) {
     Customer customer = new Customer();
     customer.setFirstName(firstName);
-    customer.setLastName("Azhagappan");
+    customer.setLastName(firstName+"LastName");
+    customer.setBellName(firstName+"Bell");
+    customer.setArea(firstName+"Area");
+    customer.setCompanyName(firstName+"Company");
+    customer.setEmail(firstName+"email");
+    customer.setDoorNumber(firstName+"doorNr");
+    customer.setLandmark(firstName+"Landmark");
+    customer.setReferenceNumber(firstName+"ReferenceNr");
+    customer.setStreet(firstName+"Street");
+    customer.setTelephoneNumber(firstName+"12345");
+    customer.setZipcode(firstName+"98568");
     return customer;
   }
 
