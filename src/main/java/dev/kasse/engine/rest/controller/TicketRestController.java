@@ -37,7 +37,7 @@ public class TicketRestController {
     return ticketService.getByTicketState(ticketState);
   }
 
-  @RequestMapping(path = "/", method = { RequestMethod.GET })
+  @RequestMapping(path = "/paymentType", method = { RequestMethod.GET })
   public List<Ticket> getByPaymentType(String paymentType) {
     return ticketService.getByPaymentType(paymentType);
   }

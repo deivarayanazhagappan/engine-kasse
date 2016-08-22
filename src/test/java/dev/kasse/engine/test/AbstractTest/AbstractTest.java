@@ -38,6 +38,18 @@ public abstract class AbstractTest {
         null, "Kasse");
   }
 
+  protected Ticket createNewTicket(Customer customer) {
+    Ticket ticket = new Ticket();
+    ticket.setCreateDate(new Date());
+    ticket.setSubTotal(15.25);
+    ticket.setTotalTax(0.50);
+    ticket.setTotal(15.50);
+    ticket.setCustomer(customer);
+
+    return ticket;
+    
+  }
+  
   protected Ticket createNewTicket(PaymentType paymentType,
       TicketState ticketState, int tableNumber, String userName,
       String customerName) {
@@ -102,6 +114,7 @@ public abstract class AbstractTest {
     customer.setReferenceNumber(firstName+"ReferenceNr");
     customer.setStreet(firstName+"Street");
     customer.setTelephoneNumber(firstName+"12345");
+    customer.setSecondaryTelephone(firstName+"54321");
     customer.setZipcode(firstName+"98568");
     return customer;
   }
