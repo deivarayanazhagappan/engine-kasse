@@ -31,13 +31,15 @@ Usage steps
 
 2. Start the mongoDb server (mongod.exe) by getting into the installation location [....MongoDB\Server\3.2\bin].
 
-Note: By default mongodb server runs on port 27017 and it is configured in the mongo-repository-context.xml in the project.
+   Note: By default mongodb server runs on port 27017.
 
 3. Clone the project.
 
 4. Import the project onto eclipse by importing it as a Maven Project.
 
-5. Check the test cases and enjoy!!!
+5. Run maven build "mvn clean install"
+
+6. Check the test cases and enjoy!!!
 
 Contributions are most welcome :)
 
