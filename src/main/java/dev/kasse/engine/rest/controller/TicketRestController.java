@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.kasse.engine.entities.Ticket;
@@ -28,17 +29,22 @@ public class TicketRestController {
   }
 
   @RequestMapping(path = "/id", method = { RequestMethod.GET })
-  public Ticket getById(String id) {
+  public Ticket getById(@RequestParam(required=true) String id) {
     return ticketService.getById(id);
   }
 
   @RequestMapping(path = "/state", method = { RequestMethod.GET })
-  public List<Ticket> getByState(String ticketState) {
+  public List<Ticket> getByState(@RequestParam(required=true) String ticketState) {
     return ticketService.getByTicketState(ticketState);
   }
 
   @RequestMapping(path = "/paymentType", method = { RequestMethod.GET })
-  public List<Ticket> getByPaymentType(String paymentType) {
+  public List<Ticket> getByPaymentType(@RequestParam(required=true) String paymentType) {
     return ticketService.getByPaymentType(paymentType);
+  }
+
+  @RequestMapping(path = "/tableNumber", method = { RequestMethod.GET })
+  public List<Ticket> getByTableNumber(@RequestParam(required=true) int tableNumber) {
+    return ticketService.getByTableNumber(tableNumber);
   }
 }

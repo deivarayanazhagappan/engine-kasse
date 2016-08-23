@@ -117,7 +117,7 @@ public class TicketQueryTest extends AbstractTest {
   @Test
   public void queryByTableNumber() {
 
-    shopTableRepository.save(createShopTable(1));
+    shopTableRepository.save(createShopTable(1,1));
     ticketRepository.save(createNewTicket(1));
 
     assertEquals(1, ticketRepository.findByTableNumber(1).size());

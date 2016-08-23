@@ -35,13 +35,13 @@ public class TicketServiceImpl implements TicketService {
   public List<Ticket> getByTicketState(String ticketState) {
 
     TicketState state;
-    if (ticketState.equals(TicketState.CLOSED)) {
+    if (ticketState.equals(TicketState.CLOSED.name())) {
       state = TicketState.CLOSED;
-    } else if (ticketState.equals(TicketState.OPEN)) {
+    } else if (ticketState.equals(TicketState.OPEN.name())) {
       state = TicketState.OPEN;
-    } else if (ticketState.equals(TicketState.PAID)) {
+    } else if (ticketState.equals(TicketState.PAID.name())) {
       state = TicketState.PAID;
-    } else if (ticketState.equals(TicketState.REOPENED)) {
+    } else if (ticketState.equals(TicketState.REOPENED.name())) {
       state = TicketState.REOPENED;
     } else {
       return new ArrayList<Ticket>();
@@ -53,11 +53,11 @@ public class TicketServiceImpl implements TicketService {
   @Override
   public List<Ticket> getByPaymentType(String paymentType) {
     PaymentType type;
-    if (paymentType.equals(PaymentType.CARD)) {
+    if (paymentType.equals(PaymentType.CARD.name())) {
       type = PaymentType.CARD;
-    } else if (paymentType.equals(PaymentType.CASH)) {
+    } else if (paymentType.equals(PaymentType.CASH.name())) {
       type = PaymentType.CASH;
-    } else if (paymentType.equals(PaymentType.ONLINE)) {
+    } else if (paymentType.equals(PaymentType.ONLINE.name())) {
       type = PaymentType.ONLINE;
     } else {
       return new ArrayList<Ticket>();

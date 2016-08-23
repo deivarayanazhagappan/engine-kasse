@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import dev.kasse.engine.entities.ShopTable;
 import dev.kasse.engine.entities.Ticket;
 import dev.kasse.engine.entities.TicketItem;
 import dev.kasse.engine.state.PaymentType;
@@ -41,6 +42,7 @@ public class TicketMockProvider {
     // add 2 ticketItems
     List<TicketItem> ticketItems = createTicketItems();
     ticket.addTicketItems(ticketItems);
+    ticket.setTable(createShopTable(tableNumber));
     return ticket;
   }
 
@@ -63,5 +65,14 @@ public class TicketMockProvider {
     ticketItem.setTotal(6.25);
     ticketItem.setTaxRate(0.25);
     return ticketItem;
+  }
+
+  public static ShopTable createShopTable(int tableNumber) {
+    ShopTable table = new ShopTable();
+    table.setId("kasseId");
+    table.setFloor(1);
+    table.setNumber(tableNumber);
+    table.setOccupied(false);
+    return table;
   }
 }

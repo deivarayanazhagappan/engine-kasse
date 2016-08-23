@@ -4,6 +4,12 @@ import java.util.List;
 
 import dev.kasse.engine.entities.Customer;
 import dev.kasse.engine.repository.query.CustomerRepository;
+
+/**
+ * 
+ * @author Deivarayan Azhagappan
+ *
+ */
 public interface CustomerService {
 
   // POST service

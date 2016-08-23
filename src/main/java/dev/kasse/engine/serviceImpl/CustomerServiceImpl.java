@@ -66,19 +66,16 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public void deleteCustomer(Customer customer) {
-    // TODO Auto-generated method stub
-    
-  }
+    customerRepository.delete(customer);
+ }
 
   @Override
   public void deleteCustomerById(String customerId) {
-    // TODO Auto-generated method stub
-    
+    customerRepository.delete(customerId);
   }
 
   @Override
   public void deleteAllCustomer() {
-    // TODO Auto-generated method stub
-    
+    customerRepository.deleteAll();
   }
 }

@@ -62,7 +62,7 @@ public abstract class AbstractTest {
     ticket.setTotal(15.50);
 
     ticket.setCustomer(createCustomer(customerName));
-    ticket.setTable(createShopTable(tableNumber));
+    ticket.setTable(createShopTable(tableNumber,1));
     // add 2 ticketItems
     List<TicketItem> ticketItems = createTicketItems();
     ticket.addTicketItems(ticketItems);
@@ -140,14 +140,15 @@ public abstract class AbstractTest {
     return ticketItem;
   }
 
-  protected ShopTable createShopTable(int tableNumber) {
-    ShopTable table = shopTableRepository.findByNumber(tableNumber);
-    if (table == null) {
-      table = new ShopTable();
-      table.setFloor(1);
+  protected ShopTable createShopTable(int tableNumber, int floor) {
+    List<ShopTable> tables = shopTableRepository.findByNumber(tableNumber);
+    if (tables == null || tables.size() == 0) {
+      ShopTable table = new ShopTable();
+      table.setFloor(floor);
       table.setOccupied(false);
-      table.setNumber(1);
+      table.setNumber(tableNumber);
+      return table;
     }
-    return table;
+    return tables.get(0);
   }
 }

@@ -39,8 +39,8 @@ public class ShopTableEntityTest {
 
   @Before
   public void init() {
-    shopTableRepository.deleteAll();
     ticketRepository.deleteAll();
+    shopTableRepository.deleteAll();
   }
 
   @Test
@@ -94,24 +94,6 @@ public class ShopTableEntityTest {
 
   // test cascade
   @Test
-  public void cascadeInsertShopTable() {
-    ticketRepository.save(createNewTicket());
-    List<Ticket> tickets = ticketRepository.findAll();
-    assertEquals(1, tickets.size());
-
-    Ticket ticket = tickets.get(0);
-    ShopTable table = ticket.getTable();
-    assertNotNull(table);
-    String tableId = table.getId();
-
-    List<ShopTable> shopTables = shopTableRepository.findAll();
-    assertEquals(1, shopTables.size());
-    ShopTable tableInRepository = shopTables.get(0);
-    assertNotNull(tableInRepository);
-    assertEquals(tableId, tableInRepository.getId());
-  }
-
-  @Test
   public void cascadeUpdateShopTable() {
     ticketRepository.save(createNewTicket());
     assertEquals(1, ticketRepository.findAll().size());
@@ -132,25 +114,6 @@ public class ShopTableEntityTest {
     assertNotNull(table);
     assertEquals(false, table.isOccupied());
 
-  }
-
-  @Test
-  public void shouldNotCascadeDeleteShopTable() {
-    ticketRepository.save(createNewTicket());
-    assertEquals(1, ticketRepository.findAll().size());
-
-    Ticket ticket = ticketRepository.findAll().get(0);
-    ShopTable table = ticket.getTable();
-    assertNotNull(table);
-    assertEquals(true, table.isOccupied());
-
-    // delete ticket
-    ticketRepository.delete(ticket);
-
-    assertEquals(0, ticketRepository.findAll().size());
-
-    // Shop table still exist as it is independent of ticket
-    assertEquals(1, shopTableRepository.findAll().size());
   }
 
   @Test
@@ -180,14 +143,14 @@ public class ShopTableEntityTest {
 
   protected ShopTable createNewTableIfNotExist(int tableNumber) {
 
-    ShopTable shopTable = shopTableRepository.findByNumber(tableNumber);
-    if (shopTable == null) {
-      shopTable = new ShopTable();
+    List<ShopTable> shopTables = shopTableRepository.findByNumber(tableNumber);
+    if (shopTables == null || shopTables.isEmpty()) {
+      ShopTable shopTable = new ShopTable();
       shopTable.setNumber(tableNumber);
       shopTable.setOccupied(true);
       shopTable.setFloor(1);
       return shopTable;
     }
-    return shopTable;
+    return shopTables.get(0);
   }
 }

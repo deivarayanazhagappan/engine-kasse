@@ -1,21 +1,7 @@
-/*
- * Copyright 2016 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package dev.kasse.engine.test.rest;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,11 +18,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import dev.kasse.engine.repository.query.TicketRepository;
 import dev.kasse.engine.service.TicketService;
+import dev.kasse.engine.state.PaymentType;
+import dev.kasse.engine.state.TicketState;
 import dev.kasse.engine.test.AbstractTest.AbstractTest;
 import dev.kasse.engine.test.MockProvider.TicketMockProvider;
 
@@ -77,7 +66,7 @@ public class TicketControllerTest extends AbstractTest {
   @Before
   public void setUp() {
     MockitoAnnotations.initMocks(this);
-    this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+    mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
     ticketService.setTicketRepository(ticketRepository);
   }
 
@@ -87,9 +76,21 @@ public class TicketControllerTest extends AbstractTest {
     Mockito.when(ticketRepository.findAll()).thenReturn(
         TicketMockProvider.createTickets());
 
-    this.mockMvc.perform(get(ALL)).andExpect(status().isOk())
+    mockMvc.perform(get(ALL)).andExpect(status().isOk())
         .andExpect(jsonPath("$.*", hasSize(1)))
         .andExpect(jsonPath("$[0].ticketItems", hasSize(2)));
+  }
+
+
+  @Test
+  public void getById() throws Exception {
+
+    Mockito.when(ticketRepository.findById("kasseId")).thenReturn(
+        TicketMockProvider.createNewTicket(1));
+
+    mockMvc.perform(get(ID).param("id", "kasseId"))
+        .andExpect(status().isOk()).andExpect(jsonPath("id").value("kasseId"));
+
   }
 
   @Test
@@ -98,19 +99,138 @@ public class TicketControllerTest extends AbstractTest {
     Mockito.when(ticketRepository.findById("kasseId")).thenReturn(
         TicketMockProvider.createNewTicket(1));
 
-    this.mockMvc.perform(get("/ticket/id")).andExpect(status().isOk())
-        .andExpect(jsonPath("id").value("kasseId"));
+    mockMvc.perform(get(ID))
+      .andExpect(status().is4xxClientError());
 
   }
 
   @Test
-  public void getById() throws Exception {
+  public void getByUnavailableId() throws Exception {
 
-    Mockito.when(ticketRepository.findById("kasseId")).thenReturn(
-        TicketMockProvider.createNewTicket(1));
+    Mockito.when(ticketRepository.findById(Mockito.anyString())).thenReturn(
+        null);
 
-    this.mockMvc.perform(get("/ticket/id").param("id", "kasseId"))
-        .andExpect(status().isOk()).andExpect(jsonPath("id").value("kasseId"));
+    MvcResult result = mockMvc.perform(get(ID).param("id", "kasseId"))
+      .andExpect(status().isOk())
+      .andReturn();
+
+    assertTrue(result.getResponse().getContentAsString().isEmpty());
+
+  }
+
+  @Test
+  public void getByState() throws Exception {
+
+    Mockito.when(ticketRepository.findByTicketState(Mockito.anyObject())).thenReturn(
+        TicketMockProvider.createTickets());
+
+    mockMvc.perform(get(STATE)
+        .param("ticketState", TicketState.OPEN.name()))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$[0].ticketState").value(TicketState.OPEN.name()));
+
+  }
+
+  @Test
+  public void getByMissingStateParameter() throws Exception {
+
+    Mockito.when(ticketRepository.findByTicketState(TicketState.OPEN)).thenReturn(
+        TicketMockProvider.createTickets());
+
+    mockMvc.perform(get(STATE))
+      .andExpect(status().is4xxClientError());
+
+  }
+
+  @Test
+  public void getByUnavailableState() throws Exception {
+
+    Mockito.when(ticketRepository.findByTicketState(TicketState.OPEN)).thenReturn(
+        null);
+
+    MvcResult result = mockMvc.perform(get(STATE).param("ticketState", TicketState.OPEN.name()))
+      .andExpect(status().isOk())
+      .andReturn();
+
+    assertTrue(result.getResponse().getContentAsString().isEmpty());
+
+  }
+
+  @Test
+  public void getByPaymentType() throws Exception {
+
+    Mockito.when(ticketRepository.findByPaymentType(PaymentType.CASH)).thenReturn(
+        TicketMockProvider.createTickets());
+
+    mockMvc.perform(get(PAYMENT_TYPE)
+        .param("paymentType", PaymentType.CASH.name()))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$[0].paymentType").value(PaymentType.CASH.name()));
+
+  }
+
+  @Test
+  public void getByMissingPaymentTypeParameter() throws Exception {
+
+    Mockito.when(ticketRepository.findByPaymentType(PaymentType.CASH)).thenReturn(
+        TicketMockProvider.createTickets());
+
+    mockMvc.perform(get(PAYMENT_TYPE))
+      .andExpect(status().is4xxClientError());
+
+  }
+
+  @Test
+  public void getByUnavailablePaymentType() throws Exception {
+
+    Mockito.when(ticketRepository.findByPaymentType(PaymentType.CASH)).thenReturn(
+        null);
+
+    MvcResult result = mockMvc.perform(get(PAYMENT_TYPE)
+      .param("paymentType", PaymentType.CASH.name()))
+      .andExpect(status().isOk())
+      .andReturn();
+
+    assertTrue(result.getResponse().getContentAsString().isEmpty());
+
+  }
+
+  @Test
+  public void getByTableNumber() throws Exception {
+
+    Mockito.when(ticketRepository.findByTableNumber(Mockito.anyInt())).thenReturn(
+        TicketMockProvider.createTickets());
+
+    mockMvc.perform(get(TABLE_NUMBER)
+        .param("tableNumber", "1"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$[0].table.number").value(1));
+
+  }
+
+  @Test
+  public void getByMissingTableNumberParameter() throws Exception {
+
+    Mockito.when(ticketRepository.findByTableNumber(Mockito.anyInt())).thenReturn(
+        TicketMockProvider.createTickets());
+
+    mockMvc.perform(get(TABLE_NUMBER))
+      .andExpect(status().is4xxClientError());
+
+  }
+
+  @Test
+  public void getByUnavailableTableNumber() throws Exception {
+
+    Mockito.when(ticketRepository.findByTableNumber(Mockito.anyInt())).thenReturn(
+        null);
+
+    MvcResult result = mockMvc.perform(get(TABLE_NUMBER)
+      .param("tableNumber", "1"))
+      .andExpect(status().isOk())
+      .andReturn();
+
+    assertTrue(result.getResponse().getContentAsString().isEmpty());
 
   }
 

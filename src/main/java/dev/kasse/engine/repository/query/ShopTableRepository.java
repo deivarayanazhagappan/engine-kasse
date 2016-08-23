@@ -15,5 +15,9 @@ public interface ShopTableRepository extends MongoRepository<ShopTable, String> 
 
   public List<ShopTable> findAll();
 
-  public ShopTable findByNumber(int tableNumber);
+  public List<ShopTable> findByNumber(int tableNumber);
+
+  public List<ShopTable> findByFloor(int floor);
+
+  public List<ShopTable> findByNumberAndFloor(int tableNumber, int floor);
 }
