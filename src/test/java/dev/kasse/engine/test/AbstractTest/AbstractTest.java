@@ -10,6 +10,7 @@ import dev.kasse.engine.entities.Customer;
 import dev.kasse.engine.entities.ShopTable;
 import dev.kasse.engine.entities.Ticket;
 import dev.kasse.engine.entities.TicketItem;
+import dev.kasse.engine.entities.User;
 import dev.kasse.engine.repository.query.ShopTableRepository;
 import dev.kasse.engine.state.PaymentType;
 import dev.kasse.engine.state.TicketState;
@@ -117,6 +118,17 @@ public abstract class AbstractTest {
     customer.setSecondaryTelephone(firstName+"54321");
     customer.setZipcode(firstName+"98568");
     return customer;
+  }
+
+  protected User createUser(String firstName) {
+    User user = new User();
+    user.setFirstName(firstName);
+    user.setLastName(firstName+"LastName");
+    user.setTelephoneNumber(firstName+"12345");
+    user.setPassword(firstName+"password");
+    user.setDriver(true);
+    user.setAvailableForDelivery(true);
+    return user;
   }
 
   protected List<TicketItem> createTicketItems() {
