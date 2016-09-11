@@ -1,0 +1,56 @@
+package dev.kasse.engine.rest.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import dev.kasse.engine.entities.MenuCategory;
+import dev.kasse.engine.service.MenuCategoryService;
+import dev.kasse.engine.state.TicketType;
+
+/**
+ * 
+ * @author Deivarayan Azhagappan
+ *
+ */
+@RestController
+@RequestMapping("/menuCategory")
+public class MenuCategoryRestController {
+
+  @Autowired
+  public MenuCategoryService menuCategoryService;
+
+  @RequestMapping(path = "/all", method = { RequestMethod.GET })
+  public List<MenuCategory> getAllCategories() {
+    return menuCategoryService.getAll();
+  }
+
+  @RequestMapping(path = "/id", method = { RequestMethod.GET })
+  public MenuCategory getById(@RequestParam(required=true) String id) {
+    return menuCategoryService.getById(id);
+  }
+
+  @RequestMapping(path = "/name", method = { RequestMethod.GET })
+  public List<MenuCategory> getByName(@RequestParam(required=true) String name) {
+    return menuCategoryService.getByName(name);
+  }
+
+  @RequestMapping(path = "/categoryId", method = { RequestMethod.GET })
+  public List<MenuCategory> getByCategoryId(@RequestParam(required=true) int categoryId) {
+    return menuCategoryService.getByCategoryId(categoryId);
+  }
+
+  @RequestMapping(path = "/visible", method = { RequestMethod.GET })
+  public List<MenuCategory> getByVisible(@RequestParam(required=true) boolean visible) {
+    return menuCategoryService.getByVisibility(visible);
+  }
+
+  @RequestMapping(path = "/type", method = { RequestMethod.GET })
+  public List<MenuCategory> getByType(@RequestParam(required=true) TicketType type) {
+    return menuCategoryService.getByType(type);
+  }
+}
