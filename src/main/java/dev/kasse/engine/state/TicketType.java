@@ -9,7 +9,5 @@ public enum TicketType {
 
   DINE_IN,
 
-  HOME_DELIVERY,
-
-  PICK_UP
+  HOME_DELIVERY
 }
