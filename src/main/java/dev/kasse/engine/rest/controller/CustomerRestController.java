@@ -33,6 +33,16 @@ public class CustomerRestController {
     customerService.deleteCustomer(customer);
   }
 
+  @RequestMapping(method = { RequestMethod.DELETE })
+  public void deleteCustomer(@RequestParam(required=true) String customerId) {
+    customerService.deleteCustomerById(customerId);
+  }
+
+  @RequestMapping(path = "/all", method = { RequestMethod.DELETE })
+  public void deleteAllCustomers() {
+    customerService.deleteAllCustomers();
+  }
+
   @RequestMapping(path = "/all", method = { RequestMethod.GET })
   public List<Customer> getAllCustomer() {
     return customerService.getAll();

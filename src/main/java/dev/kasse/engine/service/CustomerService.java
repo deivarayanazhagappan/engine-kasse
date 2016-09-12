@@ -19,7 +19,7 @@ public interface CustomerService {
 
   public void deleteCustomerById(String customerId);
 
-  public void deleteAllCustomer();
+  public void deleteAllCustomers();
   
   // GET service
   public List<Customer> getAll();

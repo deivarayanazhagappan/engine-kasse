@@ -24,6 +24,26 @@ public class MenuCategoryRestController {
   @Autowired
   public MenuCategoryService menuCategoryService;
 
+  @RequestMapping(method = { RequestMethod.POST })
+  public void saveMenuCategory(@RequestParam(required=true) MenuCategory category) {
+    menuCategoryService.saveMenuCategory(category);
+  }
+
+  @RequestMapping(method = { RequestMethod.DELETE })
+  public void deleteMenuCategory(@RequestParam(required=true) MenuCategory category) {
+    menuCategoryService.deleteMenuCategory(category);
+  }
+
+  @RequestMapping(method = { RequestMethod.DELETE })
+  public void deleteMenuCategoryById(@RequestParam(required=true) String categoryId) {
+    menuCategoryService.deleteMenuCategoryById(categoryId);
+  }
+
+  @RequestMapping(path = "/all", method = { RequestMethod.DELETE })
+  public void deleteAllMenuCategories() {
+    menuCategoryService.deleteAllMenuCategories();
+  }
+
   @RequestMapping(path = "/all", method = { RequestMethod.GET })
   public List<MenuCategory> getAllCategories() {
     return menuCategoryService.getAll();

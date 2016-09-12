@@ -54,4 +54,24 @@ public class MenuCategoryServiceImpl implements MenuCategoryService {
       MenuCategoryRepository menuCategoryRepository) {
     this.menuCategoryRepository = menuCategoryRepository;  
   }
+
+  @Override
+  public void saveMenuCategory(MenuCategory category) {
+    menuCategoryRepository.save(category);
+  }
+
+  @Override
+  public void deleteMenuCategory(MenuCategory category) {
+    menuCategoryRepository.delete(category);
+  }
+
+  @Override
+  public void deleteMenuCategoryById(String categoryId) {
+    menuCategoryRepository.delete(categoryId);
+  }
+
+  @Override
+  public void deleteAllMenuCategories() {
+    menuCategoryRepository.deleteAll();  
+  }
  }

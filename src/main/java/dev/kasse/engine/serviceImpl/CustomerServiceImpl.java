@@ -75,7 +75,7 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public void deleteAllCustomer() {
+  public void deleteAllCustomers() {
     customerRepository.deleteAll();
   }
 }

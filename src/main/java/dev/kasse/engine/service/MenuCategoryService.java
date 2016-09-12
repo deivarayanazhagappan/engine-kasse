@@ -8,6 +8,15 @@ import dev.kasse.engine.state.TicketType;
 
 public interface MenuCategoryService {
 
+  //POST service
+  public void saveMenuCategory(MenuCategory category);
+
+  public void deleteMenuCategory(MenuCategory category);
+
+  public void deleteMenuCategoryById(String categoryId);
+
+  public void deleteAllMenuCategories();
+ 
   public List<MenuCategory> getAll();
 
   public MenuCategory getById(String id);
