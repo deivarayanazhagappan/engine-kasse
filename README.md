@@ -9,11 +9,12 @@ As kasse engine uses REST end point connection, the client application can be of
 ### Java version required
 - Java 8
 
-### Development Framework used:
+### Development Tools and Framework used:
 - Spring Boot
 - Spring data
 - MongoDB
 - REST services
+- Maven
 
 ### Testing frameworks:
 - JUnit 4
