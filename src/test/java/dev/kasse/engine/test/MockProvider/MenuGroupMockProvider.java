@@ -23,6 +23,7 @@ public class MenuGroupMockProvider {
   public static MenuGroup createMenuGroup(String name) {
     MenuGroup group = new MenuGroup();
     group.setCategoryId("999");
+    group.setId("groupId");
     group.setGroupId(111);
     group.setName(name);
     group.setGaenge(1);

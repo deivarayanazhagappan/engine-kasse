@@ -34,7 +34,7 @@ public class MenuCategoryRestController {
     menuCategoryService.deleteMenuCategory(category);
   }
 
-  @RequestMapping(method = { RequestMethod.DELETE })
+  @RequestMapping(path = "/id", method = { RequestMethod.DELETE })
   public void deleteMenuCategoryById(@RequestParam(required=true) String categoryId) {
     menuCategoryService.deleteMenuCategoryById(categoryId);
   }

@@ -33,8 +33,8 @@ public class CustomerRestController {
     customerService.deleteCustomer(customer);
   }
 
-  @RequestMapping(method = { RequestMethod.DELETE })
-  public void deleteCustomer(@RequestParam(required=true) String customerId) {
+  @RequestMapping(path = "/id", method = { RequestMethod.DELETE })
+  public void deleteCustomerById(@RequestParam(required=true) String customerId) {
     customerService.deleteCustomerById(customerId);
   }
 
