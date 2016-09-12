@@ -24,7 +24,7 @@ public class MenuItemMockProvider {
 
     item.setBarcode("12345");
     item.setGroupId("groupId");
-    item.setId("11a");
+    item.setId("itemId");
     item.setItemId(111);
     item.setName(name);
     item.setPrice(2.50);

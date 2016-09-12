@@ -44,7 +44,7 @@ public class MenuGroupRestController {
   }
 
   @RequestMapping(path = "/all", method = { RequestMethod.GET })
-  public List<MenuGroup> getAllCategories() {
+  public List<MenuGroup> getAllGroups() {
     return menuGroupService.getAll();
   }
 
