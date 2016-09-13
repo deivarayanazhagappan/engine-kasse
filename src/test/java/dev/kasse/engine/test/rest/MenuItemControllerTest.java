@@ -161,7 +161,7 @@ public class MenuItemControllerTest extends AbstractTest {
   @Test
   public void getByItemId() throws Exception {
 
-    Mockito.when(menuItemRepository.findByItemId(Mockito.anyInt())).thenReturn(
+    Mockito.when(menuItemRepository.findByItemId(Mockito.anyString())).thenReturn(
         MenuItemMockProvider.createMenuItems());
 
     mockMvc.perform(get(ITEM_ID)
@@ -174,7 +174,7 @@ public class MenuItemControllerTest extends AbstractTest {
   @Test
   public void getByMissingItemIdParameter() throws Exception {
 
-    Mockito.when(menuItemRepository.findByItemId(Mockito.anyInt())).thenReturn(
+    Mockito.when(menuItemRepository.findByItemId(Mockito.anyString())).thenReturn(
         MenuItemMockProvider.createMenuItems());
 
     mockMvc.perform(get(ITEM_ID))
@@ -185,7 +185,7 @@ public class MenuItemControllerTest extends AbstractTest {
   @Test
   public void getByUnavailableItemId() throws Exception {
 
-    Mockito.when(menuItemRepository.findByItemId(Mockito.anyInt())).thenReturn(
+    Mockito.when(menuItemRepository.findByItemId(Mockito.anyString())).thenReturn(
         null);
 
     MvcResult result = mockMvc.perform(get(ITEM_ID)

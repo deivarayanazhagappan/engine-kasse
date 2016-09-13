@@ -25,10 +25,12 @@ public class MenuItemMockProvider {
     item.setBarcode("12345");
     item.setGroupId("groupId");
     item.setId("itemId");
-    item.setItemId(111);
+    item.setTax(19.00);
+    item.setItemId("111");
     item.setName(name);
     item.setPrice(2.50);
     item.setVariablePrice(true);
+    item.setShouldPrintToKitchen(true);
     return item;
   }
 }

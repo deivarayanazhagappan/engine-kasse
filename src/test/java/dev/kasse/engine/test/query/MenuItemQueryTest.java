@@ -82,8 +82,8 @@ public class MenuItemQueryTest {
 
     menuItemRepository.save(createMenuItems());
 
-    assertEquals(2, menuItemRepository.findByItemId(111).size());
-    assertEquals(0, menuItemRepository.findByItemId(100).size());
+    assertEquals(2, menuItemRepository.findByItemId("111").size());
+    assertEquals(0, menuItemRepository.findByItemId("100").size());
   }
 
   private List<MenuItem> createMenuItems() {
@@ -98,7 +98,7 @@ public class MenuItemQueryTest {
 
     item.setBarcode("12345");
     item.setGroupId("groupId");
-    item.setItemId(111);
+    item.setItemId("111");
     item.setName(name);
     item.setPrice(2.50);
     item.setVariablePrice(true);

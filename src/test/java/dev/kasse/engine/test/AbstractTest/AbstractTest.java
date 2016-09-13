@@ -145,10 +145,14 @@ public abstract class AbstractTest {
     ticketItem.setCategoryName("CATEGORY");
     ticketItem.setGroupName("GROUP");
     ticketItem.setItemCount(2);
+    ticketItem.setItemId("101");
     ticketItem.setItemName(itemName);
     ticketItem.setSubTotal(6.00);
     ticketItem.setTotal(6.25);
     ticketItem.setTaxRate(0.25);
+    ticketItem.setShouldPrintToKitchen(true);
+    ticketItem.setPrintedToKitchen(false);
+    ticketItem.setPrintOrder(1);
     return ticketItem;
   }
 

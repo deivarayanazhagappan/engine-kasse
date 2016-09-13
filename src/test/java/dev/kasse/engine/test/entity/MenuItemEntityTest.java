@@ -41,9 +41,11 @@ public class MenuItemEntityTest {
     MenuItem item = menuItemRepository.findAll().get(0);
     assertEquals("12345", item.getBarcode());
     assertEquals("groupId", item.getGroupId());
-    assertEquals(111, item.getItemId());
+    assertEquals("111", item.getItemId());
+    assertEquals(new Double(19.00), item.getTax());
     assertEquals("Margherita", item.getName());
     assertEquals(new Double(2.50), item.getPrice());
+    assertEquals(true, item.isShouldPrintToKitchen());
     assertNotNull(item.getId());
   }
 

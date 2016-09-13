@@ -3,6 +3,8 @@ package dev.kasse.engine.test.entity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import dev.kasse.engine.entities.Ticket;
+import dev.kasse.engine.entities.TicketItem;
 import dev.kasse.engine.repository.query.TicketRepository;
 import dev.kasse.engine.state.PaymentType;
 import dev.kasse.engine.state.TicketState;
@@ -48,8 +51,23 @@ public class TicketEntityTest extends AbstractTest {
     assertEquals(new Double(15.50), ticket.getTotal());
 
     assertNotNull(ticket.getCustomer());
-    assertEquals(2, ticket.getTicketItems().size());
+    List<TicketItem> ticketItems = ticket.getTicketItems();
+    assertEquals(2, ticketItems.size());
 
+    TicketItem ticketItem = ticketItems.get(0);
+    assertEquals("CATEGORY", ticketItem.getCategoryName());
+    assertEquals("GROUP", ticketItem.getGroupName());
+    assertEquals(2, ticketItem.getItemCount());
+    assertEquals("101", ticketItem.getItemId());
+    
+    assertEquals(true, ticketItem.isBeverage());
+    assertEquals("Cola", ticketItem.getItemName());
+    assertEquals(new Double(6.00),ticketItem.getSubTotal());
+    assertEquals(new Double(6.25), ticketItem.getTotal());
+    assertEquals(new Double(0.25), ticketItem.getTaxRate());
+    assertEquals(true, ticketItem.isShouldPrintToKitchen());
+    assertEquals(false, ticketItem.isPrintedToKitchen());
+    ticketItem.setPrintOrder(1);
   }
 
   @Test

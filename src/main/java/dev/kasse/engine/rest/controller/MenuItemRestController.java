@@ -64,7 +64,7 @@ public class MenuItemRestController {
   }
 
   @RequestMapping(path = "/itemId", method = { RequestMethod.GET })
-  public List<MenuItem> getByItemId(@RequestParam(required=true) int itemId) {
+  public List<MenuItem> getByItemId(@RequestParam(required=true) String itemId) {
     return menuItemService.getByItemId(itemId);
   }
 }

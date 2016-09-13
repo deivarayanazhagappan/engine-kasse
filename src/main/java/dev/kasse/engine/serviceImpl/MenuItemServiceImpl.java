@@ -34,7 +34,7 @@ public class MenuItemServiceImpl implements MenuItemService {
   }
 
   @Override
-  public List<MenuItem> getByItemId(int itemId) {
+  public List<MenuItem> getByItemId(String itemId) {
     return menuItemRepository.findByItemId(itemId);
   }
 

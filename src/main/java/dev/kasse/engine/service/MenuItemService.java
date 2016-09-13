@@ -10,7 +10,7 @@ public interface MenuItemService {
   //POST service
   public void saveMenuItem(MenuItem item);
 
-  public void deleteMenuItem(MenuItem group);
+  public void deleteMenuItem(MenuItem item);
 
   public void deleteMenuItemById(String itemId);
 
@@ -23,7 +23,7 @@ public interface MenuItemService {
 
   public List<MenuItem> getByName(String name);
 
-  public List<MenuItem> getByItemId(int itemId);
+  public List<MenuItem> getByItemId(String itemId);
 
   public List<MenuItem> getByGroupId(String groupId);
 

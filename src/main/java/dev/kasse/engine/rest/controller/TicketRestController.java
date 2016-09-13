@@ -23,6 +23,26 @@ public class TicketRestController {
   @Autowired
   public TicketService ticketService;
 
+  @RequestMapping(method = { RequestMethod.POST })
+  public Ticket saveTicket(@RequestParam(required=true) Ticket ticket) {
+    return ticketService.saveTicket(ticket);
+  }
+
+  @RequestMapping(method = { RequestMethod.DELETE })
+  public void deleteMenuItem(@RequestParam(required=true) Ticket ticket) {
+    ticketService.deleteTicket(ticket);
+  }
+
+  @RequestMapping(path = "/id", method = { RequestMethod.DELETE })
+  public void deleteTicketById(@RequestParam(required=true) String ticketId) {
+    ticketService.deleteTicketById(ticketId);
+  }
+
+  @RequestMapping(path = "/all", method = { RequestMethod.DELETE })
+  public void deleteAllTickets() {
+    ticketService.deleteAllTickets();
+  }
+
   @RequestMapping(path = "/all", method = { RequestMethod.GET })
   public List<Ticket> getAllTicket() {
     return ticketService.getAll();

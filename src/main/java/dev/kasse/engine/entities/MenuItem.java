@@ -16,7 +16,7 @@ public class MenuItem {
 
   private String name;
  
-  private int itemId;
+  private String itemId;
 
   private String barcode;
 
@@ -24,7 +24,11 @@ public class MenuItem {
 
   private Double price;
 
+  private Double tax;
+
   private boolean variablePrice;
+
+  private boolean shouldPrintToKitchen;
 
   public String getId() {
     return id;
@@ -42,11 +46,11 @@ public class MenuItem {
     this.name = name;
   }
 
-  public int getItemId() {
+  public String getItemId() {
     return itemId;
   }
 
-  public void setItemId(int itemId) {
+  public void setItemId(String itemId) {
     this.itemId = itemId;
   }
 
@@ -74,6 +78,14 @@ public class MenuItem {
     this.price = price;
   }
 
+  public Double getTax() {
+    return tax;
+  }
+
+  public void setTax(Double tax) {
+    this.tax = tax;
+  }
+
   public boolean isVariablePrice() {
     return variablePrice;
   }
@@ -81,4 +93,13 @@ public class MenuItem {
   public void setVariablePrice(boolean variablePrice) {
     this.variablePrice = variablePrice;
   }
+
+  public boolean isShouldPrintToKitchen() {
+    return shouldPrintToKitchen;
+  }
+
+  public void setShouldPrintToKitchen(boolean shouldPrintToKitchen) {
+    this.shouldPrintToKitchen = shouldPrintToKitchen;
+  }
+
 }

@@ -21,5 +21,5 @@ public interface MenuItemRepository extends MongoRepository<MenuItem, String> {
 
   public List<MenuItem> findByGroupId(String groupId);
 
-  public List<MenuItem> findByItemId(int itemId);
+  public List<MenuItem> findByItemId(String itemId);
 }

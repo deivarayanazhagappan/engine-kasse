@@ -7,6 +7,15 @@ import dev.kasse.engine.repository.query.TicketRepository;
 
 public interface TicketService {
 
+  //POST service
+  public Ticket saveTicket(Ticket ticket);
+
+  public void deleteTicket(Ticket ticket);
+
+  public void deleteTicketById(String ticketId);
+
+  public void deleteAllTickets();
+ 
   public List<Ticket> getAll();
 
   public Ticket getById(String id);

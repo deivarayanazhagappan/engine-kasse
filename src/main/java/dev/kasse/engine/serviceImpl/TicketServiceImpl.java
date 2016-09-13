@@ -75,4 +75,24 @@ public class TicketServiceImpl implements TicketService {
   public void setTicketRepository(TicketRepository ticketRepository) {
     this.ticketRepository = ticketRepository;
   }
+
+  @Override
+  public Ticket saveTicket(Ticket ticket) {
+    return ticketRepository.save(ticket);
+  }
+
+  @Override
+  public void deleteTicket(Ticket ticket) {
+    ticketRepository.delete(ticket);  
+  }
+
+  @Override
+  public void deleteTicketById(String ticketId) {
+   ticketRepository.delete(ticketId); 
+  }
+
+  @Override
+  public void deleteAllTickets() {
+    ticketRepository.deleteAll();   
+  }
 }

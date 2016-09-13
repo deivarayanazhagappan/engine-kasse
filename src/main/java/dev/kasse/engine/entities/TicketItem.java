@@ -2,20 +2,12 @@ package dev.kasse.engine.entities;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 /**
  * 
  * @author Deivarayan Azhagappan
  *
  */
-@Document
 public class TicketItem {
-
-  @Id
-  private String id;
 
   private String itemId;
 
@@ -35,14 +27,6 @@ public class TicketItem {
 
   private Double taxRate;
 
-  public Double getTaxRate() {
-    return taxRate;
-  }
-
-  public void setTaxRate(Double taxRate) {
-    this.taxRate = taxRate;
-  }
-
   private boolean beverage;
 
   private int printOrder;
@@ -51,16 +35,7 @@ public class TicketItem {
 
   private boolean printedToKitchen;
 
-  @DBRef
   private List<CookingInstruction> cookingInstructions;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
 
   public String getItemId() {
     return itemId;
@@ -88,6 +63,14 @@ public class TicketItem {
 
   public String getGroupName() {
     return groupName;
+  }
+
+  public Double getTaxRate() {
+    return taxRate;
+  }
+
+  public void setTaxRate(Double taxRate) {
+    this.taxRate = taxRate;
   }
 
   public void setGroupName(String groupName) {
